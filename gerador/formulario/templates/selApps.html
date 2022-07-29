@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'titulo' %}Upload do Arquivo{% endblock %} 
+
+{% block 'head' %}{% endblock %}
+
+{% block 'conteudo' %}
+<div class="BlocoEntrada">
+
+
+    <form method="POST" action="{% url 'validaSelApp' %}" enctype="multipart/form-data"> {% csrf_token %}
+
+        <span>Selecione o App que deseja gerar o monitoramento sintético:</span>
+
+        {% for i in selecoes.apps %}
+
+            <div class="opcao">
+                <input type="radio" id="{{i.App}}" name="appSel" class="inputOpcaoApp" value="{{forloop.counter0}}">
+                <label for="{{i.App}}">
+                    <h3>{{i.App}}</h3>
+                    <p>{{i.ScoreTotal}}</p>
+                    <p>{{i.Provider}}</p>
+                </label>
+            </div>
+
+        {% endfor %}
+        
+        <input type="submit" value="Próximo">
+    </form>
+
+
+</div>
+{% endblock %}

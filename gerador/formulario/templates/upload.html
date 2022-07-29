@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'titulo' %}Upload do Arquivo{% endblock %} 
+
+{% block 'head' %}
+{% endblock %}
+
+{% block 'conteudo' %}
+<div class="BlocoEntrada">
+    <form method="POST" action="{% url 'validaFile' %}" enctype="multipart/form-data"> {% csrf_token %}
+        <span>Faça o upload do arquivo dos provedores selecionados aqui:</span>
+        {{upload.arq}}
+        <input type="submit" value="Próximo">
+    </form>
+</div>
+{% endblock %}

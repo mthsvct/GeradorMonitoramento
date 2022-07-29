@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'titulo' %}Seleção de Intervalo{% endblock %} 
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/selPeriodo.css' %}">
+{% endblock %}
+
+{% block 'conteudo' %}
+<div class="BlocoEntrada">
+
+    <form method="POST" action="{% url 'validaIntervalo' %}" enctype="multipart/form-data"> {% csrf_token %}
+
+        <span>Selecione o intervalo do monitoramento sintético:</span>
+        
+        <div class="menuPeriodos">
+            {% for i in intervalos %}
+                <div class="opcaoPeriodo">
+                    <input class="inputOpcaoPeriodo" type="radio" name="intervalo" id="{{i.idI}}" value="{{i.idI}}" onchange="outrosPeriodos(1); /* insereValorMinutagem('{{i.idI}}') */">
+                    <label for="{{i.idI}}">{{i.time}}</label>
+                </div>
+            {% endfor %}
+            <div class="opcaoPeriodo">
+                <input class="inputOpcaoPeriodo" type="radio" name="intervalo" id="-1" value="-1" onchange="outrosPeriodos(0)">
+                <label for="-1">Outros</label>
+            </div>
+        </div>
+
+
+
+        <div id="DatasPersonalizadas" style="display: none;">
+            
+            <div class="Minutagem">
+                <label for="minutagem">Intervalo: </label>
+                <input type="number" min="15" max="730" name="minutagem" id="inputMin" value="15">
+                <label for="minutagem">min. </label>
+            </div>
+            
+        </div>
+
+        <input type="submit" value="Próximo">
+    </form>
+
+</div>
+{% endblock %}

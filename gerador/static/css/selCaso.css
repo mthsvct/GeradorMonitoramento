@@ -1,0 +1,125 @@
+.menuCaso {
+    display: flex;
+    width: 80%;
+    /* border: 1px solid red; */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.opcaoCaso {
+    display: flex;
+    width: 85%;
+    /* border: 1px solid blue; */
+    height: 80px;
+    align-items: center;
+    cursor: pointer;
+    transition: ease-in-out 0.4s;
+}
+
+.opcaoCaso:hover {
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    padding-top: 15px;
+    padding-bottom: 15px; 
+}
+
+.inputCaso {
+    margin-left: 50px;
+    margin-right: 50px;
+    width: 30px;
+    height: 40px;
+     cursor: pointer;
+}
+
+.opcaoCaso strong {
+    margin-right: 10px;
+}
+
+.opcaoCaso label {
+    font-size: 16pt;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#selRequisitos {
+    display: flex;
+    width: 50%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border: 1px dashed black;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.opcaoRequisito {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    cursor: pointer;
+    width: 70%;
+    transition: ease-in-out 0.5s;
+}
+
+.opcaoRequisito:hover {
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    padding-top: 15px;
+    padding-bottom: 15px; 
+}
+
+.opcaoRequisito label {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* -------------- SELEÇÃO DOS MICROSSERVIÇOS --------------------- */
+
+#selMS {
+    display: flex;
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 30px;
+    border: 1px dashed black;
+}
+
+.opcaoMS {
+    display: flex;
+    /* border: 1px solid blue; */
+    width: 80%;
+    margin-bottom: 20px;
+    align-items: center;
+    cursor: pointer;
+    transition: cubic-bezier(0.445, 0.05, 0.55, 0.95) 0.4s;
+    
+}
+
+.opcaoMS:hover {
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    padding-top: 15px;
+    padding-bottom: 15px; 
+}
+
+.opcaoMS label {
+    /* border: 1px solid orange; */
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.opcaoMS label p {
+    font-size: 15pt;
+}

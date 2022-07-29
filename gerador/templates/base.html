@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<title>{% block 'titulo' %} {% endblock %}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+		
+		{% block 'head' %} {% endblock %}
+	</head>
+
+
+	<body>
+
+		<header>
+			<nav>
+				
+				<div class="option">
+					<a href="{% url 'upload' %}">
+						<h2>Gerador</h2>
+					</a>
+				</div>
+				
+				<div class="option">
+					<a href="">
+						<h2>Sobre</h2>
+					</a>
+				</div>
+				
+				<div class="option">
+					<a href="">
+						<h2>Ajuda</h2>
+					</a>
+				</div>
+			
+			</nav>
+		</header>
+
+		<div class="conteudo">
+			{% block 'conteudo' %}{% endblock %}
+		</div>
+
+
+	</body>
+
+
+	<script src="{% static 'js/script.js' %}"></script>
+</html>

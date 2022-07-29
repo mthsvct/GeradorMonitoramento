@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'titulo' %}Periodo{% endblock %} 
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/selPeriodo.css' %}">
+{% endblock %}
+
+{% block 'conteudo' %}
+<div class="BlocoEntrada">
+    <form method="POST" action="{% url 'validaPeriodo' %}"  enctype="multipart/form-data"> {% csrf_token %}
+        <span>Selecione o periodo do monitoramento sintético:</span>
+
+        <div class="menuPeriodos">
+
+        
+            {% for i in periodos %}
+                <div class="opcaoPeriodo">
+                    <input class="inputOpcaoPeriodo" type="radio" name="periodo" id="{{i.idP}}" value="{{i.idP}}" onchange="outrosPeriodos(1)">
+                    <label for="{{i.idP}}">{{i.time}}</label>
+                </div>
+            {% endfor %}
+
+            <div class="opcaoPeriodo">
+                <input class="inputOpcaoPeriodo" type="radio" name="periodo" id="-1" value="-1" onchange="outrosPeriodos(0)">
+                <label for="-1">Outros</label>
+            </div>
+
+            
+        </div>
+
+
+        <div id="DatasPersonalizadas" style="display: none;">
+            <div class="DataInicial">
+                <label for="DataInicial">Data Inicial:</label>
+                <input id="dataInicial" type="date" class="inputData" name="DataInicial" min="{{hoje}}" max="{{maximo}}" value="" onchange="pegaMinimo()">
+            </div>
+            
+            <div class="DataFinal">
+                <label for="DataFinal">Data Final:</label>
+                <input id="inputDataFinal" type="date" class="inputData" name="DataFinal" name="DataFinal" min="2052-12-29" max="{{maximo}}" value="">
+            </div>
+            
+        </div>
+
+
+        <input type="submit" value="Próximo">
+    </form>
+</div>
+
+
+{% endblock %}

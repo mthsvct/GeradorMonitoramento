@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'titulo' %}Seleção de Intervalo{% endblock %} 
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/selPeriodo.css' %}">
+<link rel="stylesheet" href="{% static 'css/selCaso.css' %}">
+{% endblock %}
+
+{% block 'conteudo' %}
+<div class="BlocoEntrada">
+
+    <form method="POST" action="{% url 'validaCaso' %}" enctype="multipart/form-data"> {% csrf_token %}
+
+        <span>Selecione o caso:</span>
+
+        <div class="menuCaso">
+
+            {% for i in casos %}
+                <div class="opcaoCaso">
+                    <input onchange="apresenteTalMenu(0)" type="radio" class="inputCaso" name="caso" value="{{forloop.counter}}" id="{{forloop.counter}}">
+                    <label for="{{forloop.counter}}">
+                        <strong>Caso {{forloop.counter}}:</strong>
+                        {{i}}
+                    </label>
+                </div>
+            {% endfor %}
+            
+            <div class="opcaoCaso" onclick="apresenteTalMenu(4)">
+                <input  type="radio" class="inputCaso" name="caso" value="4" id="4">
+                <label for="4">
+                    <strong>Caso 4:</strong>
+                    Selecionar um ou mais requisitos que não serão atendidos.
+                </label>
+            </div>
+
+            <div id="selRequisitos" style="display: none;">
+
+                <h3 style="margin-bottom: 25px;">Selecione o(s) requisito(s):</h3>
+            
+                <div class="opcaoRequisito">
+                    <input type="checkbox" name="disponibilidade" id="r1" class="inputCaso" value="1">
+                    <label for="r1">Disponibilidade</label>
+                </div>
+    
+                <div class="opcaoRequisito">
+                    <input type="checkbox" name="custo" id="r2" class="inputCaso" value="1">
+                    <label for="r2">Custo</label>
+                </div>
+    
+                <div class="opcaoRequisito">
+                    <input type="checkbox" name="tempoResposta" id="r3" class="inputCaso" value="1">
+                    <label for="r3">Tempo de Resposta</label>
+                </div>
+    
+            </div>
+
+
+            <div class="opcaoCaso">
+                <input onchange="apresenteTalMenu(5)" type="radio" class="inputCaso" name="caso" value="5" id="5">
+                <label for="5">
+                    <strong>Caso 5:</strong>
+                    Selecionar um ou mais microsserviços que não atenderão os requisitos.
+                </label>
+            </div>
+
+            <div id="selMS" style="display: none;">
+                <h3 style="margin-bottom: 50px; margin-top: 35px;">Selecione o(s) microsserviço(s):</h3>
+                {% for j in ms %}
+                    <div class="opcaoMS">
+                        
+                        <input type="checkbox" name="ms{{forloop.counter0}}" id="ms{{forloop.counter0}}" class="inputCaso" value="1">
+                        <label for="ms{{forloop.counter0}}">
+                            <p><strong>Prvd: {{j.Prvd}}</strong></p>
+                            <p>Score: {{j.Score}}</p>
+                            <p>Numero: {{j.MS}}</p>
+                        </label>
+                    </div>
+                {% endfor %}
+
+
+            </div>
+
+            
+        </div>
+
+
+        
+
+
+        <div id="selMicroServices"></div>
+
+
+        <input type="submit" value="Próximo">
+    </form>
+
+</div>
+{% endblock %}
