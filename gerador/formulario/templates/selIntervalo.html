@@ -17,7 +17,7 @@
         <div class="menuPeriodos">
             {% for i in intervalos %}
                 <div class="opcaoPeriodo">
-                    <input class="inputOpcaoPeriodo" type="radio" name="intervalo" id="{{i.idI}}" value="{{i.idI}}" onchange="outrosPeriodos(1); /* insereValorMinutagem('{{i.idI}}') */">
+                    <input class="inputOpcaoPeriodo" type="radio" name="intervalo" id="{{i.idI}}" value="{{i.idI}}" onchange="outrosPeriodos(1); insereValorMinutagem(15)">
                     <label for="{{i.idI}}">{{i.time}}</label>
                 </div>
             {% endfor %}
@@ -33,7 +33,7 @@
             
             <div class="Minutagem">
                 <label for="minutagem">Intervalo: </label>
-                <input type="number" min="15" max="730" name="minutagem" id="inputMin" value="15">
+                <input type="number" min="15" max="1500" name="minutagem" id="inputMin" value="15">
                 <label for="minutagem">min. </label>
             </div>
             
