@@ -12,7 +12,7 @@ from .horarios import *
 
 class Gerador():
 
-    def __init__(self, indice=0, pasta=settings.MEDIA_ROOT, intervalo=15, result=None, case=0, date_initial=None, date_final=None):
+    def __init__(self, indice=0, pasta=settings.MEDIA_ROOT, intervalo=15, result=None, case=0, date_initial=None, date_final=None, requisitos_selecionados=[]):
         self.date_initial = date_initial #...... Data inicial do monitoramento
         self.date_final = date_final #.......... Data final do monitoramento
         self.name_app = None #.................. Nome do app;
@@ -22,6 +22,8 @@ class Gerador():
         self.result = result #.................. Aqui estarão os dados do arquivo resultData.json 
         self.intervalo = intervalo #............ Intervalo em minutos, setado em 15 minutos.
         self.indice = indice #.................. Indice onde o app se encontra no vetor presente no arquivo results
+        self.requisitos_selecionados = requisitos_selecionados
+        self.resultados_gerados = None
         self.arquivos = {
             'Pasta': settings.MEDIA_ROOT,
             'NomesArqs': [] 
@@ -138,7 +140,10 @@ class Gerador():
             }
         }
         return limites
-    
+
+    def selecionarRequisito(self):
+        self.casos_requisitos(self.requisitos_selecionados)
+
     def casos_requisitos(self, selecionados):
         for indice, i in enumerate(self.microsservices):
             i['limitesSel'] = self.requisito(selecionados, indice)
@@ -201,7 +206,7 @@ class Gerador():
             nome = self.arquivos['NomesArqs'][indice]
             arq = loadFile(nome)
             
-            print(f"Gerando para o microsserviço: {self.microsservices[indice]['MS']}")
+            #print(f"Gerando para o microsserviço: {self.microsservices[indice]['MS']}")
 
             while( compareDate(aux, self.date_final) == False ):
                 arq = self.gerar(arq, i, aux)
@@ -246,14 +251,25 @@ class Gerador():
         nome = self.arquivos['Pasta']+'/gestao.json'
 
         if self.case == 1:
-            self.arquivos['Case'] = [1, 'Melhor Caso']
+            caso = [1, 'Melhor Caso']
         elif self.case == 2:
-            self.arquivos['Case'] = [2, 'Pior Caso']
+            caso = [2, 'Pior Caso']
         elif self.case == 3:
-            self.arquivos['Case'] = [3, 'Caso Aleatorio']
+            caso = [3, 'Caso Aleatorio']
         elif self.case == 4:
-            self.arquivos['Case'] = [4, 'Requisito selecionado']
+            caso = [4, 'Requisito selecionado']
         elif self.case == 5:
-            self.arquivos['Case'] = [5, 'Microsservico selecionado']
+            caso = [5, 'Microsservico selecionado']
+        
+        nomes = []
 
-        saveFinalFile(nameARQ=nome, lido=self.arquivos)
+        for indice, i in enumerate(self.microsservices):
+            nomes.append(f'{self.name_app}_MS{i["MS"]}_P{i["Prvd"]}.json')
+
+        self.resultados_gerados = {
+            'pasta': self.arquivos['Pasta'],
+            'nomesArqs': nomes,
+            'caso': caso
+        }
+
+        saveFinalFile(nameARQ=nome, lido=self.resultados_gerados)

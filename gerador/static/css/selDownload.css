@@ -1,0 +1,73 @@
+.divEscolheDownload {
+    /* border: 1px solid red; */
+    width: 100%;
+    /* height: 300px; */
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    padding-left: 100px;
+}
+
+.opcoes {
+    margin-top: 50px;
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.opcaoDownload {
+    display: flex;
+    width: 100%;
+    /* border: 1px solid greenyellow; */
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s;
+}
+
+.opcaoDownload:hover {
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    padding-top: 5px;
+    padding-bottom: 35px;
+}
+
+.iconFile {
+    margin-right: 30px;
+}
+
+.fileName {
+    width: 700px;
+}
+
+
+.opcaoDownload .botao{
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+    right: 0px;
+    background-color: white;
+    border: none;
+    color: black;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12pt;
+    transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s;
+}
+
+.opcaoDownload .botao:hover {
+    background-color: black;
+    color: white;
+}

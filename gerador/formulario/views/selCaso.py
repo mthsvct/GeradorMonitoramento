@@ -36,8 +36,6 @@ def recolheRequisitos(requestPost):
 
 def validaCaso(request):
 
-    print(request.POST)
-
     caso = int(request.POST['caso'])
     selecao = {'caso': caso, 'requisito': None, 'ms': None}
         
@@ -58,7 +56,7 @@ def validaCaso(request):
     
     montaGerador(request)
 
-    return HttpResponse(f"<p>{request.session['selecoes']['intervalo']} minutos</p>")
+    return redirect('selDownload')
 
 
 def download(request, file_name='resultData.json'):
@@ -94,6 +92,7 @@ def montaGerador(request):
     gerador.result = result
     gerador.date_initial = inicio
     gerador.date_final = final
+    gerador.requisitos_selecionados = caso['requisito']
 
     gerador.abreArq()
     gerador.abrirArqDados()

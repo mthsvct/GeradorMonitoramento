@@ -14,4 +14,5 @@ urlpatterns = [
     path('selCaso/', selCaso, name="selCaso"),
     path('validaCaso/', validaCaso, name="validaCaso"),
     path('download/', download, name="download"),
+    path('selDownload/', selDownload, name="selDownload"),
 ]

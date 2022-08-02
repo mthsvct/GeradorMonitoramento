@@ -2,6 +2,7 @@ from .uploadFile import *
 from .selecionaPeriodo import *
 from .selecionaIntervalo import *
 from .selCaso import *
+from .selDownload import *
 
 # Ordem
 #   1 - UploadFile
