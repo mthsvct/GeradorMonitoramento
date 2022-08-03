@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block 'titulo' %}Casos{% endblock %} 
+{% block 'titulo' %}Selecione o Download{% endblock %} 
 
 {% block 'head' %}
 <link rel="stylesheet" href="{% static 'css/selDownload.css' %}">
@@ -30,7 +30,7 @@
                         <h3 style="font-weight: 200;">{{i}}</h3>
                     </div>
 
-                    <a class="botao" href="">
+                    <a class="botao" href="{% url 'download' i %}">
                         <h3>
                             Download
                         </h3>
@@ -39,9 +39,17 @@
             {% endfor %} 
         </div>
         
-
+        <a href="{% url 'download' 'final.zip' %}" style="margin-top: 100px;" class="btn_todos">
+            Download ZIP
+        </a>
+    
+        <a href="{% url 'upload' %}" class="btn_todos">
+            Inicio
+        </a>
 
     </div>
+
+    
     
 
 </div>

@@ -1,4 +1,5 @@
 import datetime as dt
+import enum
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.conf import settings
@@ -17,8 +18,8 @@ def selCaso(request):
     ]
 
     ms = request.session['selecoes']['selecionado']['Resultados']
-
-    return render(request, 'selCaso.html', {'casos': casos, 'ms': ms})
+    status = request.GET.get('status')
+    return render(request, 'selCaso.html', {'status': status, 'casos': casos, 'ms': ms})
 
 def recolheRequisitos(requestPost):
     requisitosSelecionados = []
@@ -33,6 +34,12 @@ def recolheRequisitos(requestPost):
 
     return requisitosSelecionados
 
+def recolheMS(requestPost, microsservicos):
+    ms = []
+    for index, i in enumerate(microsservicos):
+        if (f'ms{index}') in requestPost:
+            ms.append(index)
+    return ms
 
 def validaCaso(request):
 
@@ -42,7 +49,12 @@ def validaCaso(request):
     if caso == 4:
         selecao['requisito'] = recolheRequisitos(requestPost=request.POST)
     elif caso == 5:
-        pass
+        ms = recolheMS(requestPost=request.POST, microsservicos=request.session['selecoes']['selecionado']['Resultados'])
+
+        if len(ms) > 0:
+            selecao['ms'] = ms
+        else:
+            return redirect('/selCaso/?status=1')
 
     request.session['selecoes'] = {
         'apps': request.session['selecoes']['apps'], 
@@ -51,17 +63,15 @@ def validaCaso(request):
         'intervalo': request.session['selecoes']['intervalo'],
         'caso': selecao
     }
-
-    #return redirect('download')
     
     montaGerador(request)
 
     return redirect('selDownload')
 
 
-def download(request, file_name='resultData.json'):
+def download(request, nome='resultData.json'):
     # Esta função baixa um arquivo
-    file_path = os.path.join(settings.MEDIA_ROOT, file_name)
+    file_path = os.path.join(settings.MEDIA_ROOT, nome)
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(),content_type="application/vnd.ms-excel")
@@ -83,9 +93,9 @@ def montaGerador(request):
 
     caso = {
         'caso': int(request.session['selecoes']['caso']['caso']),
-        'requisito': request.session['selecoes']['caso']['requisito']
+        'requisito': request.session['selecoes']['caso']['requisito'],
+        'ms': request.session['selecoes']['caso']['ms']
     }
-
 
     gerador.case = caso['caso']
     gerador.intervalo = intervalo
@@ -93,6 +103,7 @@ def montaGerador(request):
     gerador.date_initial = inicio
     gerador.date_final = final
     gerador.requisitos_selecionados = caso['requisito']
+    gerador.ms_selecionados = caso['ms']
 
     gerador.abreArq()
     gerador.abrirArqDados()

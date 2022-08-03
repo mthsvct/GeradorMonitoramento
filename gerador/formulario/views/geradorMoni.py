@@ -5,6 +5,7 @@ from dateutil import rrule
 import random
 import os
 from django.conf import settings
+import zipfile
 
 from .arquivo import *
 from .horarios import *
@@ -24,6 +25,7 @@ class Gerador():
         self.indice = indice #.................. Indice onde o app se encontra no vetor presente no arquivo results
         self.requisitos_selecionados = requisitos_selecionados
         self.resultados_gerados = None
+        self.ms_selecionados = None
         self.arquivos = {
             'Pasta': settings.MEDIA_ROOT,
             'NomesArqs': [] 
@@ -44,6 +46,7 @@ class Gerador():
             "Availability": self.microsservices[indice]['Ava'],
             "Cost": self.microsservices[indice]['Cost'],
             "ResponseTime": self.microsservices[indice]['RT'],
+            "Interval": self.intervalo,
             "Data_Inicial": str(self.date_initial),
             "Data_Final": str(self.date_final),
             "Monitoring": [] 
@@ -186,6 +189,9 @@ class Gerador():
         
         return limite
 
+    def selecionarMicroServ(self):
+        self.casos_microsservico(self.ms_selecionados)
+
     def casos_microsservico(self, selecionados):
         for indice, i in enumerate(self.microsservices):
             i['limitesSel'] = self.limitarMS(selecionados, indice, i)
@@ -247,8 +253,16 @@ class Gerador():
 
         return arq
 
+    def ziparArq(self):
+        z = zipfile.ZipFile(f'{self.arquivos["Pasta"]}/final.zip', 'w', zipfile.ZIP_DEFLATED)
+        for i in self.arquivos['NomesArqs']:
+            z.write(i, os.path.basename(i))
+        z.close()
+
     def salvarArqGestao(self):
         nome = self.arquivos['Pasta']+'/gestao.json'
+
+        self.ziparArq()
 
         if self.case == 1:
             caso = [1, 'Melhor Caso']

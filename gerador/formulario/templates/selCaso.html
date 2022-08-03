@@ -13,8 +13,18 @@
 
     <form method="POST" action="{% url 'validaCaso' %}" enctype="multipart/form-data"> {% csrf_token %}
 
+        
+        
         <span>Selecione o caso:</span>
-
+        
+        {% if status == '1' %}
+            <div>
+                <p>
+                    Você deve selecionar ao menos um microsserviço neste caso.
+                </p>
+            </div>
+        {% endif %}
+        
         <div class="menuCaso">
 
             {% for i in casos %}

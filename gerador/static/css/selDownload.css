@@ -67,7 +67,19 @@
     transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s;
 }
 
-.opcaoDownload .botao:hover {
+.btn_todos {
+    border: 1px solid black;
+    width: 25%;
+    height: 50px;
+    margin-bottom: 15px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s;
+}
+
+.opcaoDownload .botao:hover, .btn_todos:hover {
     background-color: black;
     color: white;
 }
