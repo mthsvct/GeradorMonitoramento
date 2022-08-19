@@ -3,6 +3,7 @@ from .selecionaPeriodo import *
 from .selecionaIntervalo import *
 from .selCaso import *
 from .selDownload import *
+from .oficial import restartGerador
 
 # Ordem
 #   1 - UploadFile

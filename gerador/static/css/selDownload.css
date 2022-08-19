@@ -14,7 +14,7 @@
 }
 
 .opcoes {
-    margin-top: 50px;
+    margin-top: 75px;
     display: flex;
     width: 80%;
     flex-direction: column;
@@ -83,3 +83,5 @@
     background-color: black;
     color: white;
 }
+
+

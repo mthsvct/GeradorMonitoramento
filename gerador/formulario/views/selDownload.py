@@ -6,6 +6,10 @@ from django.http import Http404
 from .oficial import gerador
 
 def selDownload(request):
-    return render(request, 'selDownload.html', {'resultados_gerados': gerador.resultados_gerados})
+    return render(request, 'selDownload.html', {
+        'resultados_gerados': gerador.resultados_gerados,
+        'idG': gerador.id
+        }
+    )
 
 

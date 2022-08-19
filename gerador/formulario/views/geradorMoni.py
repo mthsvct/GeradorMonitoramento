@@ -30,7 +30,8 @@ class Gerador():
             'Pasta': settings.MEDIA_ROOT,
             'NomesArqs': [] 
         } #..................................... Aqui serão salvos as informações sobre os arquivos de salvamento.
-
+        self.flag_gerado = 0 #.................. 0 = Não foi gerado, 1 = foi gerado.
+        self.id = -1 # ......................... Id pq eu acho que vou precisar.
 
     def abreArq(self):
         # Função que abre o arquivo result e transfere seus dados aos atributos da classe
@@ -52,16 +53,33 @@ class Gerador():
             "Monitoring": [] 
         }
 
+    def verificaPasta(self) -> bool:
+        if os.path.exists(os.path.join(self.arquivos["Pasta"], str(self.id))) == False:
+            os.makedirs( os.path.join(self.arquivos["Pasta"], str(self.id) ) )
+            return False
+        else:
+            return True # Uma pasta com este ID já foi criado.
+
+    def abrirPasta(self):
+        self.id = random.randint(0, 1000)
+        while(self.verificaPasta() == True):
+            self.id = random.randint(0, 1000)
+        
+        self.arquivos['Pasta'] = os.path.join(self.arquivos['Pasta'], str(self.id))
+            
+
     def abrirArqDados(self):
+        self.abrirPasta()
         for indice, i in enumerate(self.microsservices):
             nome = (f'{self.name_app}_MS{i["MS"]}_P{i["Prvd"]}.json')
             if len(self.arquivos['Pasta']) > 0:
-                nome = (f'{self.arquivos["Pasta"]}/{nome}')
-            arq = open(nome, 'w')
+                nome2 = os.path.join(self.arquivos["Pasta"], nome)
+                #nome = (f'{self.arquivos["Pasta"]}/{nome}')
+            arq = open(nome2, 'w')
             arq.close()
             aux = self.dadosIniciais(indice, nome)
-            saveFinalFile(nome, aux)
-            self.arquivos['NomesArqs'].append(nome)
+            saveFinalFile(nome2, aux)
+            self.arquivos['NomesArqs'].append(nome2)
 
     def vaiProCaso(self):
         # Função que verifica qual caso é o selecionado e em seguida chama a função referente ao caso.
@@ -154,6 +172,8 @@ class Gerador():
     def requisito(self, selecionados, indice):
         limite = {}
 
+        print(selecionados)
+
         if( 1 in selecionados ):
             limite['Availability'] = {
                 'Inicio':  0.0,
@@ -205,20 +225,27 @@ class Gerador():
         return retorno
     
     def montar(self):
-        for indice, i in enumerate(self.microsservices):
-            
-            aux = copy.deepcopy(self.date_initial)
-            
-            nome = self.arquivos['NomesArqs'][indice]
-            arq = loadFile(nome)
-            
-            #print(f"Gerando para o microsserviço: {self.microsservices[indice]['MS']}")
+        if self.flag_gerado == 0:
+            for indice, i in enumerate(self.microsservices):
+                
+                aux = copy.deepcopy(self.date_initial)
+                
+                nome = self.arquivos['NomesArqs'][indice]
+                arq = loadFile(nome)
 
-            while( compareDate(aux, self.date_final) == False ):
-                arq = self.gerar(arq, i, aux)
-                aux = avancaTempo(aux, self.intervalo)
+                #print(arq)
+
+                if arq != None:
+                
+                    #print(f"Gerando para o microsserviço: {self.microsservices[indice]['MS']}")
+
+                    while( compareDate(aux, self.date_final) == False ):
+                        arq = self.gerar(arq, i, aux)
+                        aux = avancaTempo(aux, self.intervalo)
+                    
+                    saveFinalFile(nome, lido=arq)
             
-            saveFinalFile(nome, lido=arq)
+            self.flag_gerado = 1
         
     def gerar(self, arq, ms, data):
 
@@ -254,13 +281,13 @@ class Gerador():
         return arq
 
     def ziparArq(self):
-        z = zipfile.ZipFile(f'{self.arquivos["Pasta"]}/final.zip', 'w', zipfile.ZIP_DEFLATED)
+        z = zipfile.ZipFile(os.path.join(self.arquivos['Pasta'], 'final.zip'), 'w', zipfile.ZIP_DEFLATED)
         for i in self.arquivos['NomesArqs']:
             z.write(i, os.path.basename(i))
         z.close()
 
     def salvarArqGestao(self):
-        nome = self.arquivos['Pasta']+'/gestao.json'
+        nome = os.path.join(self.arquivos['Pasta'], 'gestao.json')
 
         self.ziparArq()
 

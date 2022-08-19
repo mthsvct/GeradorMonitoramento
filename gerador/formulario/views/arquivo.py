@@ -15,7 +15,7 @@ def loadFile(nome):
         with open(nome, "r", encoding="utf-8") as data_file:
             dados = json.load(data_file) # envia os dados já presentes no arquivo json.
     else:
-        dados = [] # Caso o arquivo não exista é enviado uma lista.
+        dados = None # Caso o arquivo não exista é enviado uma lista.
     return dados
 
 

@@ -69,9 +69,9 @@ def validaCaso(request):
     return redirect('selDownload')
 
 
-def download(request, nome='resultData.json'):
+def download(request, idG, nome='resultData.json'):
     # Esta função baixa um arquivo
-    file_path = os.path.join(settings.MEDIA_ROOT, nome)
+    file_path = os.path.join(settings.MEDIA_ROOT, str(idG), nome)
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(),content_type="application/vnd.ms-excel")

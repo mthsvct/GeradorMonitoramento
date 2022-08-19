@@ -10,8 +10,17 @@
 <div class="BlocoEntrada">
     <form method="POST" action="{% url 'validaFile' %}" enctype="multipart/form-data"> {% csrf_token %}
         <span>Faça o upload do arquivo dos provedores selecionados aqui:</span>
-        {{upload.arq}}
-        <input type="submit" value="Próximo">
+        
+        <!-- {{upload.arq}} -->
+
+        <input type="file" required name="arq" id="id_arq" accept="application/JSON">
+
+        <!-- <label for="id_arq"> <h2>Arraste o arquivo aqui</h2> </label> -->
+        
+        <div class="botoesC">
+            <input type="submit" value="Próximo">
+        </div>
+        
     </form>
 </div>
 {% endblock %}

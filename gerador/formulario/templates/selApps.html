@@ -16,8 +16,8 @@
         {% for i in selecoes.apps %}
 
             <div class="opcao">
-                <input type="radio" id="{{i.App}}" name="appSel" class="inputOpcaoApp" value="{{forloop.counter0}}">
-                <label for="{{i.App}}">
+                <input type="radio" id="{{forloop.counter0}}" name="appSel" class="inputOpcaoApp" value="{{forloop.counter0}}">
+                <label for="{{forloop.counter0}}">
                     <h3>{{i.App}}</h3>
                     <p>{{i.ScoreTotal}}</p>
                     <p>{{i.Provider}}</p>
@@ -25,8 +25,15 @@
             </div>
 
         {% endfor %}
+
+        <div class="botoesS">
+            <div onclick="window.history.back()">
+                Voltar
+            </div>
+            <input type="submit" value="Próximo">
+        </div>
         
-        <input type="submit" value="Próximo">
+        <!-- <input type="submit" value="Próximo"> -->
     </form>
 
 

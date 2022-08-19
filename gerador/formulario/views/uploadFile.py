@@ -3,9 +3,15 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from ..forms import UploadFile
 import json
+from .oficial import gerador, restartGerador
+from django.conf import settings
+import os
+import shutil
 
 def uploadFile(request):
     arq = UploadFile()
+    restartGerador(gerador)
+    apagaPastas()
     return render(request, 'upload.html', { 'upload': arq } )
 
 
@@ -31,7 +37,8 @@ def validaSelApp(request):
     return redirect('selPeriodo')
 
 
-
-
-
+def apagaPastas():
+    a = os.listdir(settings.MEDIA_ROOT)
+    for index, i in enumerate(a):
+        shutil.rmtree(os.path.join(settings.MEDIA_ROOT, i))
 

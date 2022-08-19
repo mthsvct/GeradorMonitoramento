@@ -11,7 +11,7 @@
 <div class="BlocoEntrada">
 
     <div class="divEscolheDownload">
-        <h1>Arquivos Gerados! :) </h1>
+        <h1>Monitoramento Gerado por Microsservicos</h1>
         <h3 style="font-weight: 200;">Selecione o(s) arquivo(s) a realizar o download:</h3>
         
         <div class="opcoes">
@@ -30,7 +30,7 @@
                         <h3 style="font-weight: 200;">{{i}}</h3>
                     </div>
 
-                    <a class="botao" href="{% url 'download' i %}">
+                    <a class="botao" href="{% url 'download' idG i %}">
                         <h3>
                             Download
                         </h3>
@@ -39,18 +39,35 @@
             {% endfor %} 
         </div>
         
-        <a href="{% url 'download' 'final.zip' %}" style="margin-top: 100px;" class="btn_todos">
-            Download ZIP
+        <div class="informativo" style="margin-top: 50px;">
+            <i class="fa-solid fa-circle-info"></i>
+            <p>Ao sair desta tela, todos os arquivos gerados serão apagados permanentemente.</p>
+        </div>
+        
+        <a href="{% url 'download' idG 'final.zip' %}" style="margin-top: 50px;" class="btn_todos">
+            Download  <strong style="margin-left: 5px;">.ZIP</strong>
         </a>
     
-        <a href="{% url 'upload' %}" class="btn_todos">
+        <a  class="btn_todos" onclick="voltarProInicio()">
             Inicio
         </a>
 
     </div>
 
     
-    
+    <!-- href="{% url 'upload' %}" -->
 
 </div>
+
+<script>
+
+    function voltarProInicio() {
+        let a = confirm('Os arquivos gerados até o momento serão apagados permanentemente. Tudo bem?')
+        console.log(a)
+        if (a == true) {
+            window.location.href = "{% url 'upload' %}"
+        }
+    }
+
+</script>
 {% endblock %}
