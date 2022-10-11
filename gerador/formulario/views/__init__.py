@@ -4,6 +4,7 @@ from .selecionaIntervalo import *
 from .selCaso import *
 from .selDownload import *
 from .oficial import restartGerador
+from .sobre_ajuda import *
 
 # Ordem
 #   1 - UploadFile

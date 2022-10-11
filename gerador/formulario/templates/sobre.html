@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'titulo' %}Sobre{% endblock %} 
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'css/sobre_ajuda.css' %}">
+{% endblock %}
+
+{% block 'conteudo' %}
+<div class="BlocoEntrada">
+    <div class="texto">
+        <h1>Sobre</h1>
+        <p>Este é um gerador.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Thats_all_folks.svg/2560px-Thats_all_folks.svg.png" alt="">
+    </div>
+</div>
+{% endblock %}

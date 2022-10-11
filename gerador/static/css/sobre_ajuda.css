@@ -1,0 +1,13 @@
+.texto {
+    display: flex;
+    width: 80%;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.texto img {
+    width: 500px;
+}

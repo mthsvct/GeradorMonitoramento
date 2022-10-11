@@ -15,4 +15,6 @@ urlpatterns = [
     path('validaCaso/', validaCaso, name="validaCaso"),
     path('download/<int:idG>/<nome>', download, name="download"),
     path('selDownload/', selDownload, name="selDownload"),
+    path('sobre/', sobre, name="sobre"),
+    path('ajuda/', ajuda, name="ajuda")
 ]
