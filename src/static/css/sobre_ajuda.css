@@ -1,13 +1,33 @@
+.BlocoEntradaAux {
+    width: 100%;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+}
+
+
 .texto {
     display: flex;
-    width: 80%;
+    width: 100%;
     border-left: 1px solid black;
     border-right: 1px solid black;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
 .texto img {
     width: 500px;
+}
+
+.texto h1, .texto p {
+    margin-bottom: 20px;
+}
+
+.texto p {
+    font-size: 14pt;
+    width: 80%;
+    text-align: justify;
+    
 }

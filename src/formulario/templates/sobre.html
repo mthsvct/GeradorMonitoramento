@@ -4,15 +4,25 @@
 {% block 'titulo' %}Sobre{% endblock %} 
 
 {% block 'head' %}
-    <link rel="stylesheet" href="{% static 'css/sobre_ajuda.css' %}">
+<link rel="stylesheet" href="{% static 'css/sobre_ajuda.css' %}">
 {% endblock %}
 
 {% block 'conteudo' %}
-<div class="BlocoEntrada">
-    <div class="texto">
-        <h1>Sobre</h1>
-        <p>Este é um gerador.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Thats_all_folks.svg/2560px-Thats_all_folks.svg.png" alt="">
+    <div class="BlocoEntradaAux">
+        <div class="texto">
+            <h1>Sobre</h1>
+            <p>Com a computação em nuvem, as novas possibilidades trazidas pelas infraestruturas oferecidas por provedores vão se tornando cada vez mais essenciais na rotina dos clientes que já a adotaram. Estudos apontam que os fornecedores oferecem seus serviços de forma que haja uma dependência pelas as especificidades de seus serviços ou infraestrutura causando uma dificuldade de migração posterior. </p>
+            
+            <p>Uma alternativa é a abordagem de múltiplas nuvens, que refere-se à contratação de vários serviços de nuvens diferentes para a sua aplicação, podendo trazer como vantagens a alta disponibilidade e tolerância a falhas ou redução de custos. </p>
+
+            <p>
+                A partir de um contrato, o cliente pode desfrutar da infraestrutura e plataforma fornecida, conforme aquilo que foi levantado no acordo de nível de serviço (i.e. SLA, do inglês Service Level Agreement). Com isso, o descumprimento por parte do provedor deste acordo pode ocasionar sanções. Mas para detectar essas situações é necessário um sistema de monitoramento de QoS onde, no melhor dos nossos conhecimentos, ainda não existe para um ambiente de múltiplas nuvens
+            </p>
+
+            <p>
+                Neste trabalho é proposto um gerador de dados sintéticos que simule o monitoramento de um provedor de nuvem, podendo gerar dados que assemelham a diversas situações de atendimento de requisitos.
+            </p>
+
+        </div>
     </div>
-</div>
 {% endblock %}
